@@ -13,5 +13,5 @@ export const login  = async (req, res) => {
 		}
 	}
 
-	res.status(200).json({ operation: isValid });
+	res.status(200).json({ operation: isValid, data: result.recordset[0] });
 }
