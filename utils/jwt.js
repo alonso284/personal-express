@@ -6,15 +6,11 @@ export const validateJWT = Router();
 validateJWT.use((req, res, next) => {
   let token = req.headers.authorization;
   if (!token) {
-    res.status(401).json({ message: "Se requiere un token" });
+    res.status(401).json({ message: "You need a token" });
     return;
   }
 
-  if (token.startsWith("Bearer ")) {
-    token = token.split(" ")[1];
-  }
-
-  jwt.verify(token, process.env.JWT, (err, decoded) => {
+  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
     if (err) {
       return res.status(401).json({ msg: "Invalid token: " + err.message });
     }
